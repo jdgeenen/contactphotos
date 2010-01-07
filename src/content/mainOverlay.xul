@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<overlay id="contactphotos-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/javascript" src="Preferences.js"/>
+  <script type="application/javascript" src="mainOverlay.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="ContactPhotosStringBundle"
+                  src="chrome://contactphotos/locale/contactphotos.properties"/>
+  </stringbundleset>
+</overlay>

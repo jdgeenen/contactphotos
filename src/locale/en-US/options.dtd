@@ -1,0 +1,13 @@
+<!ENTITY title.label            "Contact Photos Options">
+<!ENTITY maxWidth.value         "Max Width [10ch]">
+<!ENTITY maxHeight.value        "Max Height [10ch]">
+<!ENTITY imgBorder.value        "Image Border CSS [1px solid black]">
+<!ENTITY displayOnLeft.label    "Display the photo on the left side of the header">
+<!ENTITY gravatarOptions.label  "Gravatar Options">
+<!ENTITY gravatar.label         "Use gravatars for senders without photos">
+<!ENTITY gravatarD.label        "Default Gravatar">
+<!ENTITY changes.value          "Changes to these options take effect the next time you select a message.">
+<!ENTITY online.value           "Note that you must be online to see Gravatars.">
+<!ENTITY identicon.label        "Identicon">
+<!ENTITY monster.label          "Monster">
+<!ENTITY wavatar.label          "Wavatar">

@@ -1,0 +1,5 @@
+content     contactphotos    content/
+locale      contactphotos    en-US        locale/en-US/
+
+overlay chrome://messenger/content/messenger.xul         chrome://contactphotos/content/mainOverlay.xul
+overlay chrome://messenger/content/messageWindow.xul     chrome://contactphotos/content/mainOverlay.xul
