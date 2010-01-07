@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is gContactSync.
+ * The Original Code is Contact Photos.
  *
  * The Initial Developer of the Original Code is
  * Josh Geenen <joshgeenen+contactphotos@gmail.com>.
@@ -336,8 +336,8 @@ com.ContactPhotos.getCardForEmail = function CP_getCardForEmail(aEmail) {
   }
 
   var abs = Components.classes["@mozilla.org/abmanager;1"]
-                        .getService(Components.interfaces.nsIAbManager)
-                        .directories;
+                      .getService(Components.interfaces.nsIAbManager)
+                      .directories;
 
   while (abs.hasMoreElements()) {
     var ab = abs.getNext().QueryInterface(Components.interfaces.nsIAbDirectory);
