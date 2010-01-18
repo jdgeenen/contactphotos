@@ -50,8 +50,14 @@
       <preference id="displayOnLeft"
                   name="extensions.contactphotos.displayOnLeft"
                   type="bool"/>
+      <preference id="displayOnTop"
+                  name="extensions.contactphotos.displayOnTop"
+                  type="bool"/>
       <preference id="imgBorder"
                   name="extensions.contactphotos.imgBorder"
+                  type="string"/>
+      <preference id="imgBorderRadius"
+                  name="extensions.contactphotos.imgBorderRadius"
                   type="string"/>
       <preference id="gravatar"
                   name="extensions.contactphotos.gravatar"
@@ -61,27 +67,38 @@
                   type="string"/>
     </preferences>
     <vbox>
-      <grid>
-         <columns>
-            <column/>
-            <column/>
-         </columns>
-         <rows>
-            <row align="center">
-               <label control="maxWidthBox" value="&maxWidth.value;"/>
-               <textbox preference="maxWidth" id="maxWidthBox" maxlength="10"/>
-            </row>
-            <row align="center">
-               <label control="maxHeightBox" value="&maxHeight.value;"/>
-               <textbox preference="maxHeight" id="maxHeightBox" maxlength="10"/>
-            </row>
-            <row align="center">
-               <label control="imgBorderBox" value="&imgBorder.value;"/>
-               <textbox preference="imgBorder" id="imgBorderBox" maxlength="30"/>
-            </row>
-         </rows>
-      </grid>
-      <checkbox preference="displayOnLeft" label="&displayOnLeft.label;"/>
+      <groupbox id="photoStyle">
+         <caption label="&photoStyle.label;"/>
+         <grid>
+            <columns>
+               <column/>
+               <column/>
+            </columns>
+            <rows>
+               <row align="center">
+                  <label control="maxWidthBox" value="&maxWidth.value;"/>
+                  <textbox preference="maxWidth" id="maxWidthBox" maxlength="30"/>
+               </row>
+               <row align="center">
+                  <label control="maxHeightBox" value="&maxHeight.value;"/>
+                  <textbox preference="maxHeight" id="maxHeightBox" maxlength="30"/>
+               </row>
+               <row align="center">
+                  <label control="imgBorderBox" value="&imgBorder.value;"/>
+                  <textbox preference="imgBorder" id="imgBorderBox" maxlength="80"/>
+               </row>
+               <row align="center">
+                  <label control="imgBorderRadiusBox" value="&imgBorderRadius.value;"/>
+                  <textbox preference="imgBorderRadius" id="imgBorderRadiusBox" maxlength="60"/>
+               </row>
+            </rows>
+         </grid>
+      </groupbox>
+      <groupbox id="locationOptions">
+         <caption label="&locationOptions.label;"/>
+         <checkbox preference="displayOnLeft" label="&displayOnLeft.label;"/>
+         <checkbox preference="displayOnTop" label="&displayOnTop.label;"/>
+      </groupbox>
       <groupbox id="gravatarOptions">
          <caption label="&gravatarOptions.label;"/>
          <label value="&changes.value;"/>

@@ -133,13 +133,15 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
       children.push(viewBox.removeChild(viewBox.childNodes[i]));
     }
     imgSpacer1.setAttribute("flex", "1");
+    imgSpacer1.collapsed = com.ContactPhotos.Preferences.mDisplayOnTop ? true : false;
     imgSpacer2.setAttribute("flex", "1");
     // setup the max height and width
     imgBox.style.maxWidth  = img.style.maxWidth  = maxWidth;
     imgBox.style.maxHeight = img.style.maxHeight = maxHeight;
     imgBox.style.textAlign = "center";
     // give the image a border
-    img.style.border = com.ContactPhotos.Preferences.mImgBorder;
+    img.style.border          = com.ContactPhotos.Preferences.mImgBorder;
+    img.style.MozBorderRadius = com.ContactPhotos.Preferences.mImgBorderRadius;
     // add the tooltip
     imgBox.setAttribute("tooltiptext",
                         com.ContactPhotos.StringBundle.getString("imgTooltip"));

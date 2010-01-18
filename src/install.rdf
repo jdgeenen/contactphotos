@@ -4,7 +4,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:creator>Josh Geenen</em:creator>
         <em:id>contactphotos@pirules.org</em:id>
-        <em:version>0.1.7</em:version>
+        <em:version>0.1.8</em:version>
         <em:homepageURL>http://www.pirules.org/extensions/contactphotos/index.php</em:homepageURL>
         <em:name>Contact Photos</em:name>
         <em:optionsURL>chrome://contactphotos/content/options.xul</em:optionsURL>

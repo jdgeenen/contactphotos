@@ -91,12 +91,14 @@ com.ContactPhotos.Preferences = {
    */
   register: function CP_Preferences_register() {
     // Get the preferences
-    this.mMaxHeight     = this.mPrefBranch.getCharPref("maxHeight");
-    this.mMaxWidth      = this.mPrefBranch.getCharPref("maxWidth");
-    this.mDisplayOnLeft = this.mPrefBranch.getBoolPref("displayOnLeft");
-    this.mGravatar      = this.mPrefBranch.getBoolPref("gravatar");
-    this.mGravatarD     = this.mPrefBranch.getCharPref("gravatarD");
-    this.mImgBorder     = this.mPrefBranch.getCharPref("imgBorder");
+    this.mMaxHeight       = this.mPrefBranch.getCharPref("maxHeight");
+    this.mMaxWidth        = this.mPrefBranch.getCharPref("maxWidth");
+    this.mDisplayOnLeft   = this.mPrefBranch.getBoolPref("displayOnLeft");
+    this.mDisplayOnTop    = this.mPrefBranch.getBoolPref("displayOnTop");
+    this.mGravatar        = this.mPrefBranch.getBoolPref("gravatar");
+    this.mGravatarD       = this.mPrefBranch.getCharPref("gravatarD");
+    this.mImgBorder       = this.mPrefBranch.getCharPref("imgBorder");
+    this.mImgBorderRadius = this.mPrefBranch.getCharPref("imgBorderRadius");
     // Add an observer
     this.mPrefBranch.addObserver("", this, false);
     this.mRegistered = true;
@@ -156,6 +158,14 @@ com.ContactPhotos.Preferences = {
           }
         } catch (e) { alert(e); }
         break;
+      case "displayOnTop":
+        try {
+          this.mDisplayOnTop = this.mPrefBranch.getBoolPref("displayOnTop");
+          var photoBox        = document.getElementById("msgHdrFromPhotoBox");
+          var topSpacer       = photoBox.previousSibling;
+          topSpacer.collapsed = this.mDisplayOnTop ? true : false;
+        } catch (e) { alert(e); }
+        break;
       case "gravatar":
         this.mGravatar = this.mPrefBranch.getBoolPref("gravatar");
         break;
@@ -164,7 +174,15 @@ com.ContactPhotos.Preferences = {
         break;
       case "imgBorder":
         this.mImgBorder = this.mPrefBranch.getCharPref("imgBorder");
-        img.style.border = this.mImgBorder;
+        if (img) {
+          img.style.border = this.mImgBorder;
+        }
+        break;
+      case "imgBorderRadius":
+        this.mImgBorderRadius = this.mPrefBranch.getCharPref("imgBorderRadius");
+        if (img) {
+          img.style.MozBorderRadius = this.mImgBorderRadius;
+        }
         break;
     }
   }
