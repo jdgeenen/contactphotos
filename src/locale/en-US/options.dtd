@@ -1,4 +1,7 @@
 <!ENTITY title.label            "Contact Photos Options">
+
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab               "General">
 <!ENTITY photoStyle.label       "Photo Style">
 <!ENTITY maxWidth.value         "Max Width [10ch]">
 <!ENTITY maxHeight.value        "Max Height [10ch]">
@@ -7,6 +10,9 @@
 <!ENTITY locationOptions.label  "Photo Location">
 <!ENTITY displayOnLeft.label    "Display the photo on the left side of the header">
 <!ENTITY displayOnTop.label     "Vertically place the photo on the top of the header">
+
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab          "Gravatars">
 <!ENTITY gravatarOptions.label  "Gravatar Options">
 <!ENTITY gravatar.label         "Use gravatars for senders without photos">
 <!ENTITY gravatarD.label        "Default Gravatar">

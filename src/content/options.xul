@@ -35,11 +35,12 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://contactphotos/skin/overlay.css" type="text/css"?>
 <!DOCTYPE window SYSTEM "chrome://contactphotos/locale/options.dtd">
 <prefwindow id="contactphotosPrefs"
             title="&title.label;"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <prefpane id="contactphotos-prefpane" label="&title.label;">
+  <prefpane id="pane_main" label="&main.tab;">
     <preferences>
       <preference id="maxWidth"
                   name="extensions.contactphotos.maxWidth"
@@ -58,12 +59,6 @@
                   type="string"/>
       <preference id="imgBorderRadius"
                   name="extensions.contactphotos.imgBorderRadius"
-                  type="string"/>
-      <preference id="gravatar"
-                  name="extensions.contactphotos.gravatar"
-                  type="bool"/>
-      <preference id="gravatarD"
-                  name="extensions.contactphotos.gravatarD"
                   type="string"/>
     </preferences>
     <vbox>
@@ -88,7 +83,10 @@
                   <textbox preference="imgBorder" id="imgBorderBox" maxlength="80"/>
                </row>
                <row align="center">
-                  <label control="imgBorderRadiusBox" value="&imgBorderRadius.value;"/>
+                  <label control="imgBorderRadiusBox"
+                         value="&imgBorderRadius.value;"/>
+                         <!--class="contactphotos-link-label"
+                         href="https://developer.mozilla.org/en/CSS/-moz-border-radius"/>-->
                   <textbox preference="imgBorderRadius" id="imgBorderRadiusBox" maxlength="60"/>
                </row>
             </rows>
@@ -99,6 +97,18 @@
          <checkbox preference="displayOnLeft" label="&displayOnLeft.label;"/>
          <checkbox preference="displayOnTop" label="&displayOnTop.label;"/>
       </groupbox>
+    </vbox>
+  </prefpane>
+  <prefpane id="pane_gravaters" label="&gravatars.tab;">
+   <preferences>
+      <preference id="gravatar"
+                  name="extensions.contactphotos.gravatar"
+                  type="bool"/>
+      <preference id="gravatarD"
+                  name="extensions.contactphotos.gravatarD"
+                  type="string"/>
+   </preferences>
+   <vbox>
       <groupbox id="gravatarOptions">
          <caption label="&gravatarOptions.label;"/>
          <label value="&changes.value;"/>

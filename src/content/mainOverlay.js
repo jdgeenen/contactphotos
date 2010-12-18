@@ -34,8 +34,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/gloda/utils.js");
- 
 if (!com) {
   /** A generic wrapper variable */
   var com = {};
@@ -56,6 +54,14 @@ window.addEventListener("load",
    * com.ContactPhotos.init when the window has loaded.
    */
   function CP_loadListener(e) {
+
+    // The location of gloda's utils.js changed
+    try {
+      Components.utils.import("resource://app/modules/gloda/utils.js");
+    } catch (e) {
+      Components.utils.import("resource:///modules/gloda/utils.js");
+    }
+
     try {
       com.ContactPhotos.mIOService = Components.classes["@mozilla.org/network/io-service;1"]
                                               .getService(Components.interfaces.nsIIOService);
@@ -244,7 +250,9 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
       if (photoURI === defaultPhotoURI &&
           com.ContactPhotos.Preferences.mGravatar &&
           com.ContactPhotos.mIOService && !com.ContactPhotos.mIOService.offline) {
-        let hash = GlodaUtils.md5HashString(aEmail);
+        // take the hash of the e-mail address (should be all lowercase and
+        // trimmed of leading/trailing whitespace)
+        let hash = GlodaUtils.md5HashString(aEmail.toLowerCase().trim());
         photoURI = "http://www.gravatar.com/avatar/" + encodeURIComponent(hash) +
                    "?d=" + encodeURIComponent(com.ContactPhotos.Preferences.mGravatarD);
       }
