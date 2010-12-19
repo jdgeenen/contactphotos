@@ -225,12 +225,6 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
       com.ContactPhotos.originalAddExtraAddressProcessing.apply(this, arguments);
     }
     
-    // TODO - determine what should be done here...
-    // In TB 3.3, UpdateEmailNodeDetails can be called with a new parameter
-    //if (aCardDetails !== undefined) {
-    //  return;
-    //}
-    
     // if aNode is part of the From box, then use it for the photo
     let id = aNode.parentNode.parentNode.parentNode.id;
     if (id === "expandedfromBox") {

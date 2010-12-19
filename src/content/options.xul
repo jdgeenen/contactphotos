@@ -125,7 +125,9 @@
                   <menulist id="gravatarDList" preference="gravatarD">
                      <menupopup>
                         <menuitem value="identicon" label="&identicon.label;"/>
+                        <menuitem value="mm"        label="&mm.label;"/>
                         <menuitem value="monsterid" label="&monster.label;"/>
+                        <menuitem value="retro"     label="&retro.label;"/>
                         <menuitem value="wavatar"   label="&wavatar.label;"/>
                      </menupopup>
                   </menulist>

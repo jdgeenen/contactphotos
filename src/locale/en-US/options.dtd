@@ -19,5 +19,7 @@
 <!ENTITY changes.value          "Changes to these options take effect the next time you select a message.">
 <!ENTITY online.value           "Note that you must be online to see Gravatars.">
 <!ENTITY identicon.label        "Identicon">
+<!ENTITY mm.label               "Mystery Man (generic image)">
 <!ENTITY monster.label          "Monster">
+<!ENTITY retro.label            "Retro">
 <!ENTITY wavatar.label          "Wavatar">
