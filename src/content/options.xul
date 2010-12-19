@@ -99,7 +99,7 @@
       </groupbox>
     </vbox>
   </prefpane>
-  <prefpane id="pane_gravaters" label="&gravatars.tab;">
+  <prefpane id="pane_gravatars" label="&gravatars.tab;">
    <preferences>
       <preference id="gravatar"
                   name="extensions.contactphotos.gravatar"
