@@ -64,16 +64,19 @@ window.addEventListener("load",
 
     try {
       com.ContactPhotos.mIOService = Components.classes["@mozilla.org/network/io-service;1"]
-                                              .getService(Components.interfaces.nsIIOService);
+                                               .getService(Components.interfaces.nsIIOService);
       com.ContactPhotos.mConsoleService = Components.classes['@mozilla.org/consoleservice;1']
                                                     .getService(Components.interfaces.nsIConsoleService);
       // setup the string bundle
       com.ContactPhotos.StringBundle = document.getElementById("ContactPhotosStringBundle");
       // override AddExtraAddressProcessing
       try {
-        if (AddExtraAddressProcessing) {
+        if ("AddExtraAddressProcessing" in top) {
           com.ContactPhotos.originalAddExtraAddressProcessing = AddExtraAddressProcessing;
           AddExtraAddressProcessing = com.ContactPhotos.AddExtraAddressProcessing;
+        } else if ("UpdateEmailNodeDetails" in top) {
+          com.ContactPhotos.originalAddExtraAddressProcessing = UpdateEmailNodeDetails;
+          UpdateEmailNodeDetails = com.ContactPhotos.AddExtraAddressProcessing;
         }
       } catch (e) {}
       // Override onClickEmailStar
@@ -147,7 +150,9 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
     imgBox.style.textAlign = "center";
     // give the image a border
     img.style.border          = com.ContactPhotos.Preferences.mImgBorder;
-    img.style.MozBorderRadius = com.ContactPhotos.Preferences.mImgBorderRadius;
+    img.style.MozBorderRadius =
+      img.style.borderRadius  =
+        com.ContactPhotos.Preferences.mImgBorderRadius;
     // add the tooltip
     imgBox.setAttribute("tooltiptext",
                         com.ContactPhotos.StringBundle.getString("imgTooltip"));
@@ -199,7 +204,8 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
 com.ContactPhotos.originalAddExtraAddressProcessing = null;
 
 /**
- * Meant to override AddExtraAddressProcessing, which is in TB and SM.
+ * Meant to override AddExtraAddressProcessing, which is in TB and SM in
+ * msgHdrViewOverlay.js (also called UpdateEmailNodeDetails in TB 3.3+).
  * This function calls com.ContactPhotos.originalAddressExtraAddressProcessing
  * and then updates the src of the photo with the contact's photo, if any, and
  * defaults to the defaultPhotoURI set in abCommon.js
@@ -208,7 +214,7 @@ com.ContactPhotos.originalAddExtraAddressProcessing = null;
  * a contact with the e-mail address or use the 'hascard' attribute of the
  * e-mail node.  So, this will do all of that for Seamonkey.
  */
-com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEmail, aNode) {
+com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEmail, aNode, aCardDetails) {
   try {
     // clear the hascard attribute (for Seamonkey)
     if (aNode.hasAttribute("hascard")) {
@@ -218,6 +224,13 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
     if (com.ContactPhotos.originalAddExtraAddressProcessing) {
       com.ContactPhotos.originalAddExtraAddressProcessing.apply(this, arguments);
     }
+    
+    // TODO - determine what should be done here...
+    // In TB 3.3, UpdateEmailNodeDetails can be called with a new parameter
+    //if (aCardDetails !== undefined) {
+    //  return;
+    //}
+    
     // if aNode is part of the From box, then use it for the photo
     let id = aNode.parentNode.parentNode.parentNode.id;
     if (id === "expandedfromBox") {

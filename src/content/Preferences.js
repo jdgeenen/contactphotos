@@ -181,7 +181,9 @@ com.ContactPhotos.Preferences = {
       case "imgBorderRadius":
         this.mImgBorderRadius = this.mPrefBranch.getCharPref("imgBorderRadius");
         if (img) {
-          img.style.MozBorderRadius = this.mImgBorderRadius;
+          img.style.MozBorderRadius = 
+            img.style.borderRadius  =
+              this.mImgBorderRadius;
         }
         break;
     }

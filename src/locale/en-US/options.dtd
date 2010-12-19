@@ -6,7 +6,7 @@
 <!ENTITY maxWidth.value         "Max Width [10ch]">
 <!ENTITY maxHeight.value        "Max Height [10ch]">
 <!ENTITY imgBorder.value        "Image Border CSS [1px solid black]">
-<!ENTITY imgBorderRadius.value  "Border Radius [2em]">
+<!ENTITY imgBorderRadius.value  "Border Radius [3px]">
 <!ENTITY locationOptions.label  "Photo Location">
 <!ENTITY displayOnLeft.label    "Display the photo on the left side of the header">
 <!ENTITY displayOnTop.label     "Vertically place the photo on the top of the header">
