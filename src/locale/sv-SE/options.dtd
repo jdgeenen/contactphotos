@@ -1,0 +1,23 @@
+<!ENTITY title.label "Inställningar för Contact Photos">
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab "Allmänt">
+<!ENTITY photoStyle.label "Fotostil">
+<!ENTITY maxWidth.value "Maxbredd [10ch]">
+<!ENTITY maxHeight.value "Maxhöjd [10ch]">
+<!ENTITY imgBorder.value "Bildkantlinje CSS [1px heldragen svart]">
+<!ENTITY imgBorderRadius.value "Kantlinjebredd [3px]">
+<!ENTITY locationOptions.label "Placering av foto">
+<!ENTITY displayOnLeft.label "Visa fotot på vänster sida av huvudet">
+<!ENTITY displayOnTop.label "Placera fotot lodrätt, ovanför huvudet">
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab "Gravatarer">
+<!ENTITY gravatarOptions.label "Gravatar-inställningar">
+<!ENTITY gravatar.label "Använd gravatarer för avsändare utan foton">
+<!ENTITY gravatarD.label "Standardgravatar">
+<!ENTITY changes.value "Ändringar av dessa inställningar verkställs nästa gång du öppnar ett meddelande.">
+<!ENTITY online.value "Obs.: Du måste vara online för att se gravatarer.">
+<!ENTITY identicon.label "Identikon">
+<!ENTITY mm.label "Den mystiske mannen (neutral bild)">
+<!ENTITY monster.label "Monster">
+<!ENTITY retro.label "Retro">
+<!ENTITY wavatar.label "Wavatar">

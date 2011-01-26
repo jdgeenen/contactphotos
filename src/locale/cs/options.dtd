@@ -1,0 +1,23 @@
+<!ENTITY title.label "Možnosti Contact Photos">
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab "Hlavní">
+<!ENTITY photoStyle.label "Styl fotografie">
+<!ENTITY maxWidth.value "Max. šířka [10ch]">
+<!ENTITY maxHeight.value "Max. výška [10ch]">
+<!ENTITY imgBorder.value "Image Border CSS [1px solid black]">
+<!ENTITY imgBorderRadius.value "Border Radius [3px]">
+<!ENTITY locationOptions.label "Umístění fotografie">
+<!ENTITY displayOnLeft.label "Zobrazit fotografii na levé straně hlavičky">
+<!ENTITY displayOnTop.label "Umístit fotografii v hlavičce zcela nahoře">
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab "Gravatary">
+<!ENTITY gravatarOptions.label "Možnosti Gravataru">
+<!ENTITY gravatar.label "Použít Gravatar pro odesílatele bez fotografie">
+<!ENTITY gravatarD.label "Výchozí Gravatar">
+<!ENTITY changes.value "Změny těchto nastavení se projeví při zobrazení další zprávy.">
+<!ENTITY online.value "Musíte být online pro zobrazení Gravatarů.">
+<!ENTITY identicon.label "Identicon">
+<!ENTITY mm.label "Tajemná osoba (obecný obrázek)">
+<!ENTITY monster.label "Monstrum">
+<!ENTITY retro.label "Retro">
+<!ENTITY wavatar.label "Wavatar">

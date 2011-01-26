@@ -1,0 +1,23 @@
+<!ENTITY title.label "联系人照片选项">
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab "常规">
+<!ENTITY photoStyle.label "照片样式">
+<!ENTITY maxWidth.value "最大宽度 [10ch]">
+<!ENTITY maxHeight.value "最大高度 [10ch]">
+<!ENTITY imgBorder.value "图像边缘 CSS [1px 全黑]">
+<!ENTITY imgBorderRadius.value "边界半径 [3px]">
+<!ENTITY locationOptions.label "照片位置">
+<!ENTITY displayOnLeft.label "显示照片在标题头左侧">
+<!ENTITY displayOnTop.label "在标题头顶部垂直放置照片">
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab "Gravatars">
+<!ENTITY gravatarOptions.label "Gravatar 选项">
+<!ENTITY gravatar.label "为不带照片的发送者使用 Gravatar">
+<!ENTITY gravatarD.label "默认 Gravatar">
+<!ENTITY changes.value "这些选项的更改，在您下次选择消息时生效。">
+<!ENTITY online.value "请注意，您必须在线才能看到 Gravatars。">
+<!ENTITY identicon.label "Identicon">
+<!ENTITY mm.label "神秘人（通用图像）">
+<!ENTITY monster.label "怪物">
+<!ENTITY retro.label "复古">
+<!ENTITY wavatar.label "Wavatar">
