@@ -9,7 +9,7 @@
         <em:name>Contact Photos</em:name>
         <em:optionsURL>chrome://contactphotos/content/options.xul</em:optionsURL>
         <em:description>Displays contact photos in the message header.</em:description>
-        <em:translator>Mikael Hiort af Ornäs - sv-SE</em:translator>
+        <em:translator>Mikael Hiort af Ornas - sv-SE</em:translator>
         <em:translator>Michal Stanke (michal.stanke@mikk.cz) - cs</em:translator>
         <em:translator>yfdyh000 (yfdyh000@gmail.com) - zh-CN</em:translator>
 	      <!-- Mozilla Thunderbird -->
