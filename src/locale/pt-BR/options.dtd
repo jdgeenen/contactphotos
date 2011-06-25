@@ -1,0 +1,23 @@
+<!ENTITY title.label "Opções do Contact Photos">
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab "Geral">
+<!ENTITY photoStyle.label "Estilo da foto">
+<!ENTITY maxWidth.value "Largura máxima [10ch]">
+<!ENTITY maxHeight.value "Altura máxima [10ch]">
+<!ENTITY imgBorder.value "Borda da imagem [1px solid black]">
+<!ENTITY imgBorderRadius.value "Arredondamento da borda [3px]">
+<!ENTITY locationOptions.label "Posição da foto">
+<!ENTITY displayOnLeft.label "Posicionar a foto no lado esquerdo do cabeçalho">
+<!ENTITY displayOnTop.label "Posicionar a foto no topo do cabeçalho">
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab "Gravatares">
+<!ENTITY gravatarOptions.label "Opções de gravatar">
+<!ENTITY gravatar.label "Usar gravatar para remetente sem foto">
+<!ENTITY gravatarD.label "Gravatar padrão">
+<!ENTITY changes.value "As alterações destas opções terão efeito na próxima vez que uma mensagem for selecionada.">
+<!ENTITY online.value "Observe que você precisa estar online para ver gravatares.">
+<!ENTITY identicon.label "Identicon">
+<!ENTITY mm.label "Mystery Man (imagem genérica)">
+<!ENTITY monster.label "Monstro">
+<!ENTITY retro.label "Retrô">
+<!ENTITY wavatar.label "Wavatar">

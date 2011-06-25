@@ -1,0 +1,23 @@
+<!ENTITY title.label "Contact Photos - Einstellungen">
+<!-- The General tab (basic settings) -->
+<!ENTITY main.tab "Allgemein">
+<!ENTITY photoStyle.label "Fotostil">
+<!ENTITY maxWidth.value "Maximalbreite [10ch]">
+<!ENTITY maxHeight.value "Maximalhöhe [10ch]">
+<!ENTITY imgBorder.value "Bildrahmen CSS [1px solid black]">
+<!ENTITY imgBorderRadius.value "Rahmenrundung [3px]">
+<!ENTITY locationOptions.label "Fotospeicherort">
+<!ENTITY displayOnLeft.label "Foto auf der linken Seite anzeigen">
+<!ENTITY displayOnTop.label "Foto oben anzeigen">
+<!-- Gravatar options -->
+<!ENTITY gravatars.tab "Gravatare">
+<!ENTITY gravatarOptions.label "Gravatar-Einstellungen">
+<!ENTITY gravatar.label "Gravatar für Absender ohne Foto verwenden">
+<!ENTITY gravatarD.label "Standard-Gravatar">
+<!ENTITY changes.value "Änderungen an diesen Einstellungen werden beim nächsten Öffnen einer Nachricht übernommen.">
+<!ENTITY online.value "Es muss eine Internetverbindung bestehen, um Gravatare anzeigen zu können.">
+<!ENTITY identicon.label "Identicon">
+<!ENTITY mm.label "Mystery Man (Anonym)">
+<!ENTITY monster.label "Monster">
+<!ENTITY retro.label "Retro">
+<!ENTITY wavatar.label "Wavatar">

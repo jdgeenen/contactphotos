@@ -4,7 +4,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:creator>Josh Geenen</em:creator>
         <em:id>contactphotos@pirules.org</em:id>
-        <em:version>0.1.9</em:version>
+        <em:version>0.1.11</em:version>
         <em:homepageURL>http://www.pirules.org/extensions/contactphotos/index.php</em:homepageURL>
         <em:name>Contact Photos</em:name>
         <em:optionsURL>chrome://contactphotos/content/options.xul</em:optionsURL>
@@ -12,12 +12,17 @@
         <em:translator>Mikael Hiort af Ornas - sv-SE</em:translator>
         <em:translator>Michal Stanke (michal.stanke@mikk.cz) - cs</em:translator>
         <em:translator>yfdyh000 (yfdyh000@gmail.com) - zh-CN</em:translator>
+        <em:translator>Lukas Diener[:Lukas_Skywalker] - de</em:translator>
+        <em:translator>Alejandro Perez Martin - es-ES</em:translator>
+        <em:translator>Matthieu Martin http://matthieu-martin.com - fr</em:translator>
+        <em:translator>Mauro Jose da Silva - pt-BR</em:translator>
+				<em:type>2</em:type>
 	      <!-- Mozilla Thunderbird -->
 	      <em:targetApplication>
 	          <Description>
 		            <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
 		            <em:minVersion>3.0</em:minVersion>
-		            <em:maxVersion>3.3a2pre</em:maxVersion>
+		            <em:maxVersion>5.*</em:maxVersion>
 	          </Description>
         </em:targetApplication>
         <!-- Seamonkey 2 -->
@@ -25,7 +30,7 @@
             <Description>
                 <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
                 <em:minVersion>2.0</em:minVersion>
-                <em:maxVersion>2.1b2pre</em:maxVersion>
+                <em:maxVersion>2.4a1</em:maxVersion>
             </Description>
         </em:targetApplication>
     </Description>
