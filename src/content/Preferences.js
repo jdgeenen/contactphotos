@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Josh Geenen <joshgeenen+contactphotos@gmail.com>.
- * Portions created by the Initial Developer are Copyright (C) 2010
+ * Portions created by the Initial Developer are Copyright (C) 2010-2016
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -34,22 +34,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-if (!com) {
-  /** A generic wrapper variable */
-  var com = {};
-}
-
-if (!com.ContactPhotos) {
-  /** A wrapper for all CP functions and variables */
-  com.ContactPhotos = {};
-}
+/** Containing object for ContactPhotos */
+var ContactPhotos = ContactPhotos || {};
 
 window.addEventListener("load",
   /**
    * Registers the pref observer.
    */
   function CP_PreferencesLoadListener(e) {
-    com.ContactPhotos.Preferences.register();
+    window.removeEventListener("load", CP_PreferencesLoadListener, false);
+    ContactPhotos.Preferences.register();
   },
 false);
 
@@ -58,7 +52,7 @@ window.addEventListener("unload",
    * Unregisters the pref observer.
    */
   function CP_PreferencesLoadListener(e) {
-    com.ContactPhotos.Preferences.unregister();
+    ContactPhotos.Preferences.unregister();
   },
 false);
 
@@ -69,7 +63,7 @@ false);
  * element(s).
  * @class
  */
-com.ContactPhotos.Preferences = {
+ContactPhotos.Preferences = {
   /** The max width for the image */
   mMaxWidth:     "10ch",
   /** The max height for the image */

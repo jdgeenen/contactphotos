@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Josh Geenen <joshgeenen+contactphotos@gmail.com>.
- * Portions created by the Initial Developer are Copyright (C) 2010
+ * Portions created by the Initial Developer are Copyright (C) 2010-2016
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -34,15 +34,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-if (!com) {
-  /** A generic wrapper variable */
-  var com = {};
-}
-
-if (!com.ContactPhotos) {
-  /** A wrapper for all CP functions and variables */
-  com.ContactPhotos = {};
-}
+/** Containing object for ContactPhotos */
+var ContactPhotos = ContactPhotos || {};
 
 if (!defaultPhotoURI) {
   var defaultPhotoURI = "chrome://messenger/skin/addressbook/icons/contact-generic.png";
@@ -51,9 +44,11 @@ if (!defaultPhotoURI) {
 window.addEventListener("load",
   /**
    * Intializes the string bundle, overrides a few functions, and calls
-   * com.ContactPhotos.init when the window has loaded.
+   * ContactPhotos.init when the window has loaded.
    */
   function CP_loadListener(e) {
+
+    window.removeEventListener("load", CP_loadListener, false);
 
     // The location of gloda's utils.js changed
     try {
@@ -63,57 +58,57 @@ window.addEventListener("load",
     }
 
     try {
-      com.ContactPhotos.mIOService = Components.classes["@mozilla.org/network/io-service;1"]
+      ContactPhotos.mIOService = Components.classes["@mozilla.org/network/io-service;1"]
                                                .getService(Components.interfaces.nsIIOService);
-      com.ContactPhotos.mConsoleService = Components.classes['@mozilla.org/consoleservice;1']
+      ContactPhotos.mConsoleService = Components.classes['@mozilla.org/consoleservice;1']
                                                     .getService(Components.interfaces.nsIConsoleService);
       // setup the string bundle
-      com.ContactPhotos.StringBundle = document.getElementById("ContactPhotosStringBundle");
+      ContactPhotos.StringBundle = document.getElementById("ContactPhotosStringBundle");
       // override AddExtraAddressProcessing
       try {
         if ("AddExtraAddressProcessing" in top) {
-          com.ContactPhotos.originalAddExtraAddressProcessing = AddExtraAddressProcessing;
-          AddExtraAddressProcessing = com.ContactPhotos.AddExtraAddressProcessing;
+          ContactPhotos.originalAddExtraAddressProcessing = AddExtraAddressProcessing;
+          AddExtraAddressProcessing = ContactPhotos.AddExtraAddressProcessing;
         } else if ("UpdateEmailNodeDetails" in top) {
-          com.ContactPhotos.originalAddExtraAddressProcessing = UpdateEmailNodeDetails;
-          UpdateEmailNodeDetails = com.ContactPhotos.AddExtraAddressProcessing;
+          ContactPhotos.originalAddExtraAddressProcessing = UpdateEmailNodeDetails;
+          UpdateEmailNodeDetails = ContactPhotos.AddExtraAddressProcessing;
         }
       } catch (e) {}
       // Override onClickEmailStar
       // This function is not in Seamonkey
       try {
         if (onClickEmailStar) {
-          com.ContactPhotos.originalOnClickEmailStar = onClickEmailStar;
-          onClickEmailStar = com.ContactPhotos.onClickEmailStar;
+          ContactPhotos.originalOnClickEmailStar = onClickEmailStar;
+          onClickEmailStar = ContactPhotos.onClickEmailStar;
         }
       } catch (e) {}
       // override editContactInlineUI.deleteContact
       // This function is not in Seamonkey
       try {
         if (editContactInlineUI && editContactInlineUI.deleteContact) {
-          com.ContactPhotos.originalDeleteContact = editContactInlineUI.deleteContact;
-          editContactInlineUI.deleteContact = com.ContactPhotos.deleteContact;
+          ContactPhotos.originalDeleteContact = editContactInlineUI.deleteContact;
+          editContactInlineUI.deleteContact = ContactPhotos.deleteContact;
         }
       } catch (e) {}
       // add the photo box
-      com.ContactPhotos.init();
+      ContactPhotos.init();
     }
-    catch (e) { com.ContactPhotos.reportError(e); }
+    catch (e) { ContactPhotos.reportError(e); }
   },
 false);
 
 /** The contact for the sender of the selected message */
-com.ContactPhotos.mCurrentContact = null;
+ContactPhotos.mCurrentContact = null;
 /** The AB in which the contact for the sender of the selected message is stored */
-com.ContactPhotos.mCurrentAb      = null;
+ContactPhotos.mCurrentAb      = null;
 /** The emailAddressNode last passed to onClickEmailStar */
-com.ContactPhotos.mCurrentNode    = null;
+ContactPhotos.mCurrentNode    = null;
 /** The string bundle */
-com.ContactPhotos.StringBundle    = null;
+ContactPhotos.StringBundle    = null;
 /** An nsIIOService */
-com.ContactPhotos.mIOService      = null;
+ContactPhotos.mIOService      = null;
 /** An nsIConsoleService */
-com.ContactPhotos.mConsoleService = null;
+ContactPhotos.mConsoleService = null;
 
 /**
  * Initializes this add-on.
@@ -123,7 +118,7 @@ com.ContactPhotos.mConsoleService = null;
  * contact who sent the message.  If the sender is not a contact, or if the
  * contact does not have a photo, the generic photo is used.
  */
-com.ContactPhotos.init = function ContactPhotos_init(aURI) {
+ContactPhotos.init = function ContactPhotos_init(aURI) {
   try {
     let viewBox    = document.getElementById("expandedHeaderView");
     var newHbox    = document.createElement("hbox");
@@ -134,40 +129,40 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
     let img        = document.createElementNS("http://www.w3.org/1999/xhtml",
                                               "html:img");
     var children   = [];
-    let maxWidth   = com.ContactPhotos.Preferences.mMaxWidth;
-    let maxHeight  = com.ContactPhotos.Preferences.mMaxHeight;
+    let maxWidth   = ContactPhotos.Preferences.mMaxWidth;
+    let maxHeight  = ContactPhotos.Preferences.mMaxHeight;
   
     // remove all children from viewBox
     for (let i = 0; i < viewBox.childNodes.length; i++) {
       children.push(viewBox.removeChild(viewBox.childNodes[i]));
     }
     imgSpacer1.setAttribute("flex", "1");
-    imgSpacer1.collapsed = com.ContactPhotos.Preferences.mDisplayOnTop ? true : false;
+    imgSpacer1.collapsed = ContactPhotos.Preferences.mDisplayOnTop ? true : false;
     imgSpacer2.setAttribute("flex", "1");
     // setup the max height and width
     imgBox.style.maxWidth  = img.style.maxWidth  = maxWidth;
     imgBox.style.maxHeight = img.style.maxHeight = maxHeight;
     imgBox.style.textAlign = "center";
     // give the image a border
-    img.style.border          = com.ContactPhotos.Preferences.mImgBorder;
+    img.style.border          = ContactPhotos.Preferences.mImgBorder;
     img.style.MozBorderRadius =
       img.style.borderRadius  =
-        com.ContactPhotos.Preferences.mImgBorderRadius;
+        ContactPhotos.Preferences.mImgBorderRadius;
     // add the tooltip
     imgBox.setAttribute("tooltiptext",
-                        com.ContactPhotos.StringBundle.getString("imgTooltip"));
+                        ContactPhotos.StringBundle.getString("imgTooltip"));
     img.onclick = function (e) {
       // if there isn't a current contact or AB then don't do anything
-      if (!com.ContactPhotos.mCurrentContact || !com.ContactPhotos.mCurrentContact) {
-        alert(com.ContactPhotos.StringBundle.getString("addBeforeClick"));
+      if (!ContactPhotos.mCurrentContact || !ContactPhotos.mCurrentContact) {
+        alert(ContactPhotos.StringBundle.getString("addBeforeClick"));
         return;
       }
       window.openDialog("chrome://messenger/content/addressbook/abEditCardDialog.xul",
                         "",
                         "chrome,modal,resizable=no,centerscreen",
                         {
-                          abURI: com.ContactPhotos.mCurrentAb.URI,
-                          card:  com.ContactPhotos.mCurrentContact
+                          abURI: ContactPhotos.mCurrentAb.URI,
+                          card:  ContactPhotos.mCurrentContact
                         });
     };
     // give some IDs
@@ -182,7 +177,7 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
     imgVbox.appendChild(imgSpacer1);
     imgVbox.appendChild(imgBox);
     imgVbox.appendChild(imgSpacer2);
-    if (com.ContactPhotos.Preferences.mDisplayOnLeft) {
+    if (ContactPhotos.Preferences.mDisplayOnLeft) {
       // add imgBox to the new hbox (first so it is on the left)
       newHbox.appendChild(imgVbox);
     }
@@ -190,23 +185,23 @@ com.ContactPhotos.init = function ContactPhotos_init(aURI) {
     while (children.length > 0) {
       newHbox.appendChild(children.shift());
     }
-    if (!com.ContactPhotos.Preferences.mDisplayOnLeft) {
+    if (!ContactPhotos.Preferences.mDisplayOnLeft) {
       // add imgBox to the new hbox (last so it is on the right)
       newHbox.appendChild(imgVbox);
     }
     // add the new hbox to expandedHeaderView
     viewBox.appendChild(newHbox);
   }
-  catch (e) { com.ContactPhotos.reportError(e); }
+  catch (e) { ContactPhotos.reportError(e); }
 };
 
 /** The original AddExtraAddressProcessing function */
-com.ContactPhotos.originalAddExtraAddressProcessing = null;
+ContactPhotos.originalAddExtraAddressProcessing = null;
 
 /**
  * Meant to override AddExtraAddressProcessing, which is in TB and SM in
  * msgHdrViewOverlay.js (also called UpdateEmailNodeDetails in TB 3.3+).
- * This function calls com.ContactPhotos.originalAddressExtraAddressProcessing
+ * This function calls ContactPhotos.originalAddressExtraAddressProcessing
  * and then updates the src of the photo with the contact's photo, if any, and
  * defaults to the defaultPhotoURI set in abCommon.js
  *
@@ -214,15 +209,15 @@ com.ContactPhotos.originalAddExtraAddressProcessing = null;
  * a contact with the e-mail address or use the 'hascard' attribute of the
  * e-mail node.  So, this will do all of that for Seamonkey.
  */
-com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEmail, aNode, aCardDetails) {
+ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEmail, aNode, aCardDetails) {
   try {
     // clear the hascard attribute (for Seamonkey)
     if (aNode.hasAttribute("hascard")) {
       aNode.removeAttribute("hascard");
     }
     // call the original
-    if (com.ContactPhotos.originalAddExtraAddressProcessing) {
-      com.ContactPhotos.originalAddExtraAddressProcessing.apply(this, arguments);
+    if (ContactPhotos.originalAddExtraAddressProcessing) {
+      ContactPhotos.originalAddExtraAddressProcessing.apply(this, arguments);
     }
     
     // if aNode is part of the From box, then use it for the photo
@@ -231,13 +226,13 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
       let photoElem = document.getElementById("msgHdrFromPhoto");
       let photoURI  = defaultPhotoURI;
       // reset mCurrentContact & mCurrentAb
-      com.ContactPhotos.mCurrentContact = null;
-      com.ContactPhotos.mCurrentAb      = null;
+      ContactPhotos.mCurrentContact = null;
+      ContactPhotos.mCurrentAb      = null;
 
       // Seamonkey doesn't use the hascard attribute and doesn't search the ABs
       // for the contact, so do so manually if necessary
       if (aNode.getAttribute("hascard") === "") {
-        var cardDetails = com.ContactPhotos.getCardForEmail(aEmail);
+        var cardDetails = ContactPhotos.getCardForEmail(aEmail);
         aNode.cardDetails = cardDetails;
         aNode.setAttribute("hascard", (cardDetails && cardDetails.card ? "true" : "false"));
       }
@@ -245,9 +240,9 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
       // If there is a contact for the sender then get his or her photo
       if (aNode.getAttribute("hascard") === "true") {
         let card  = aNode.cardDetails.card;
-        com.ContactPhotos.mCurrentContact = card;
-        com.ContactPhotos.mCurrentAb      = aNode.cardDetails.book;
-        photoURI  = com.ContactPhotos.getPhotoURI(card.getProperty("PhotoName", null));
+        ContactPhotos.mCurrentContact = card;
+        ContactPhotos.mCurrentAb      = aNode.cardDetails.book;
+        photoURI  = ContactPhotos.getPhotoURI(card.getProperty("PhotoName", null));
       }
 
       // use a gravatar if we still have the default URI, if the gravatar pref is
@@ -255,68 +250,68 @@ com.ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEm
       // TB 3 has MailOfflineMgr.isOnline() and SM 2 has CheckOnline()...
       // both just get the IO service
       if (photoURI === defaultPhotoURI &&
-          com.ContactPhotos.Preferences.mGravatar &&
-          com.ContactPhotos.mIOService && !com.ContactPhotos.mIOService.offline) {
+          ContactPhotos.Preferences.mGravatar &&
+          ContactPhotos.mIOService && !ContactPhotos.mIOService.offline) {
         // take the hash of the e-mail address (should be all lowercase and
         // trimmed of leading/trailing whitespace)
         let hash = GlodaUtils.md5HashString(aEmail.toLowerCase().trim());
         photoURI = "http://www.gravatar.com/avatar/" + encodeURIComponent(hash) +
-                   "?d=" + encodeURIComponent(com.ContactPhotos.Preferences.mGravatarD);
+                   "?d=" + encodeURIComponent(ContactPhotos.Preferences.mGravatarD);
       }
       photoElem.setAttribute("src", photoURI);
     }
   }
-  catch (e) { com.ContactPhotos.reportError(e); }
+  catch (e) { ContactPhotos.reportError(e); }
 };
 
 /** The original onClickEmailStar method */
-com.ContactPhotos.originalOnClickEmailStar = null;
+ContactPhotos.originalOnClickEmailStar = null;
 
 /**
  * Meant to override onClickEmailStar to update the current AB and contact
- * in com.ContactPhotos.
+ * in ContactPhotos.
  * This is only in Thunderbird 3 (not Seamonkey)
  */
-com.ContactPhotos.onClickEmailStar = function CP_onClickEmailStar(aEvent, aEmailAddressNode) {
+ContactPhotos.onClickEmailStar = function CP_onClickEmailStar(aEvent, aEmailAddressNode) {
   // call the original
-  if (com.ContactPhotos.originalOnClickEmailStar) {
-    com.ContactPhotos.originalOnClickEmailStar.apply(document, arguments);
+  if (ContactPhotos.originalOnClickEmailStar) {
+    ContactPhotos.originalOnClickEmailStar.apply(document, arguments);
   }
   this.mCurrentNode = aEmailAddressNode;
   // update the current AB and contact
   if (aEmailAddressNode && aEmailAddressNode.cardDetails) {
-    com.ContactPhotos.mCurrentAb      = aEmailAddressNode.cardDetails.book;
-    com.ContactPhotos.mCurrentContact = aEmailAddressNode.cardDetails.card;
+    ContactPhotos.mCurrentAb      = aEmailAddressNode.cardDetails.book;
+    ContactPhotos.mCurrentContact = aEmailAddressNode.cardDetails.card;
   }
   else {
-    com.ContactPhotos.mCurrentAb      = null;
-    com.ContactPhotos.mCurrentContact = null;
+    ContactPhotos.mCurrentAb      = null;
+    ContactPhotos.mCurrentContact = null;
   }
 };
 
 /** The original editContactInlineUI.DeleteContact method */
-com.ContactPhotos.originalDeleteContact = null;
+ContactPhotos.originalDeleteContact = null;
 
 /**
  * Meant to override editContactInlineUI.DeleteContact to update the current
- * AB and contact variables in com.ContactPhotos.
+ * AB and contact variables in ContactPhotos.
  * This is only in Thunderbird 3 (not Seamonkey)
  */
-com.ContactPhotos.deleteContact = function CP_deleteContact() {
+ContactPhotos.deleteContact = function CP_deleteContact() {
   // call the original
-  if (com.ContactPhotos.originalDeleteContact) {
-    com.ContactPhotos.originalDeleteContact.apply(editContactInlineUI, arguments);
+  if (ContactPhotos.originalDeleteContact) {
+    ContactPhotos.originalDeleteContact.apply(editContactInlineUI, arguments);
   }
   // now update the current AB and contact
   // this doesn't always set to null because the original function doesn't
   // always delete the contact (could be read-only and the user can cancel)
   if (this.mCurrentNode && this.mCurrentNode.cardDetails) {
-    com.ContactPhotos.mCurrentAb      = com.ContactPhotos.mCurrentNode.cardDetails.book;
-    com.ContactPhotos.mCurrentContact = com.ContactPhotos.mCurrentNode.cardDetails.card;
+    ContactPhotos.mCurrentAb      = ContactPhotos.mCurrentNode.cardDetails.book;
+    ContactPhotos.mCurrentContact = ContactPhotos.mCurrentNode.cardDetails.card;
   }
   else {
-    com.ContactPhotos.mCurrentAb      = null;
-    com.ContactPhotos.mCurrentContact = null;
+    ContactPhotos.mCurrentAb      = null;
+    ContactPhotos.mCurrentContact = null;
   }
 };
 
@@ -324,11 +319,11 @@ com.ContactPhotos.deleteContact = function CP_deleteContact() {
  * Sends the details of an error message to the Error Console and alerts the
  * user.
  */
-com.ContactPhotos.reportError = function CP_reportError(aError) {
-  let msg = com.ContactPhotos.StringBundle.getString("error") + "\n" + aError +
-            "\n\n" + com.ContactPhotos.StringBundle.getString("pleaseReport");
+ContactPhotos.reportError = function CP_reportError(aError) {
+  let msg = ContactPhotos.StringBundle.getString("error") + "\n" + aError +
+            "\n\n" + ContactPhotos.StringBundle.getString("pleaseReport");
   dump(msg);
-  com.ContactPhotos.mConsoleService.logStringMessage(msg);
+  ContactPhotos.mConsoleService.logStringMessage(msg);
   alert(msg);
 };
 
@@ -345,7 +340,7 @@ com.ContactPhotos.reportError = function CP_reportError(aError) {
  *                   was found with the given e-mail address, or if the e-mail
  *                  address was empty.
  */
-com.ContactPhotos.getCardForEmail = function CP_getCardForEmail(aEmail) {
+ContactPhotos.getCardForEmail = function CP_getCardForEmail(aEmail) {
   var result = { book: null, card: null };
 
   if (!aEmail) {
@@ -363,8 +358,8 @@ com.ContactPhotos.getCardForEmail = function CP_getCardForEmail(aEmail) {
       if (card) {
         result.book = ab;
         result.card = card;
-        com.ContactPhotos.mCurrentAb      = ab;
-        com.ContactPhotos.mCurrentContact = card;
+        ContactPhotos.mCurrentAb      = ab;
+        ContactPhotos.mCurrentContact = card;
         return result;
       }
     }
@@ -381,7 +376,7 @@ com.ContactPhotos.getCardForEmail = function CP_getCardForEmail(aEmail) {
  * Returns an nsIFile of the directory in which contact photos are stored.
  * This will create the directory if it does not yet exist.
  */
-com.ContactPhotos.getPhotosDir = function CP_getPhotosDir() {
+ContactPhotos.getPhotosDir = function CP_getPhotosDir() {
   var file = Components.classes["@mozilla.org/file/directory_service;1"]
                        .getService(Components.interfaces.nsIProperties)
                        .get("ProfD", Components.interfaces.nsIFile);
@@ -403,11 +398,11 @@ com.ContactPhotos.getPhotosDir = function CP_getPhotosDir() {
  *
  * @return A URI pointing to a photo.
  */
-com.ContactPhotos.getPhotoURI = function CP_getPhotoURI(aPhotoName) {
+ContactPhotos.getPhotoURI = function CP_getPhotoURI(aPhotoName) {
   if (!aPhotoName) {
     return defaultPhotoURI;
   }
-  var file = com.ContactPhotos.getPhotosDir();
+  var file = ContactPhotos.getPhotosDir();
   try {
     file.append(aPhotoName);
   }
