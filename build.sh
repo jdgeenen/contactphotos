@@ -8,7 +8,7 @@
 
 # NOTE: The VERSION here is just used for the package name
 # Edit install.rdf to change the actual VERSION
-VERSION=0.1.12
+VERSION=1.0.0
 SRC_DIR=./src
 # Dest should be absolute or relative to SRC_DIR
 DEST=$(pwd)/downloads/contactphotos-$VERSION.xpi
