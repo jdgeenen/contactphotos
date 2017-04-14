@@ -238,7 +238,7 @@ ContactPhotos.AddExtraAddressProcessing = function CP_extraAdrProcessing(aEmail,
       }
 
       // If there is a contact for the sender then get his or her photo
-      if (aNode.getAttribute("hascard") === "true") {
+      if (aNode.getAttribute("hascard") === "true" && aNode.cardDetails.card) {
         let card  = aNode.cardDetails.card;
         ContactPhotos.mCurrentContact = card;
         ContactPhotos.mCurrentAb      = aNode.cardDetails.book;
