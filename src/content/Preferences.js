@@ -76,8 +76,7 @@ ContactPhotos.Preferences = {
   /** The pref branch for this add-on */
   mPrefBranch: Components.classes["@mozilla.org/preferences-service;1"]
                         .getService(Components.interfaces.nsIPrefService)
-                        .getBranch("extensions.contactphotos.")
-                        .QueryInterface(Components.interfaces.nsIPrefBranch2),
+                        .getBranch("extensions.contactphotos."),
   /** Stores whether the pref observer has been registered */
   mRegistered: false,
   /**
@@ -93,6 +92,13 @@ ContactPhotos.Preferences = {
     this.mGravatarD       = this.mPrefBranch.getCharPref("gravatarD");
     this.mImgBorder       = this.mPrefBranch.getCharPref("imgBorder");
     this.mImgBorderRadius = this.mPrefBranch.getCharPref("imgBorderRadius");
+
+    // nsIPrefBranch2 was merged into nsIPrefBranch in Gecko 13 (TB 13/SM 2.10)
+    // TB 57 removed support for it.
+    if (!("addObserver" in this.mPrefBranch)) {
+      this.mPrefBranch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    }
+
     // Add an observer
     this.mPrefBranch.addObserver("", this, false);
     this.mRegistered = true;
